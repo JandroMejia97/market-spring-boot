@@ -19,6 +19,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compile group: 'org.projectlombok', name: 'lombok'
 
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
 	runtimeOnly 'org.postgresql:postgresql'
 
 
