@@ -4,5 +4,5 @@ At the moment of its conception, this project is for learning purposes. Is a RES
 
 ## Credentials
 The basic credentials to access the API are:
-**username:** admin
-**password:** admin123
+* **username:** admin
+* **password:** admin123
