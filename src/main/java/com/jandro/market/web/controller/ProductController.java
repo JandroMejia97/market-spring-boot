@@ -2,6 +2,10 @@ package com.jandro.market.web.controller;
 
 import com.jandro.market.domain.Product;
 import com.jandro.market.domain.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +22,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAll(@RequestParam(name = "category") Optional<Integer> categoryId) {
+    @ApiOperation("Get all products on the market or all products in a specific category.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Category not found.")
+    })
+    public ResponseEntity<List<Product>> getAll(@ApiParam(value = "Category id", required = false, example = "2") @RequestParam(name = "category", required = false) Optional<Integer> categoryId) {
         if (categoryId.isPresent())
             return productService.getByCategory(categoryId.get())
                     .filter(Predicate.not(List::isEmpty))
@@ -28,12 +37,19 @@ public class ProductController {
     }
 
     @PostMapping
+    @ApiOperation("Save a product.")
+    @ApiResponse(code = 201, message = "CREATED")
     public ResponseEntity<Product> save(@RequestBody Product product) {
         return new ResponseEntity<>(this.productService.save(product), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> get(@PathVariable("id") int id) {
+    @ApiOperation("Search a product with an ID.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Product not found.")
+    })
+    public ResponseEntity<Product> get(@ApiParam(value = "Product id", required = true, example = "7") @PathVariable("id") int id) {
         return ResponseEntity.of(productService.get(id));
         /* **
         return this.productService.get(id)
@@ -43,6 +59,11 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("Delete a product with an ID.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Product not found.")
+    })
     public ResponseEntity<Boolean> delete(@PathVariable("id") int id) {
         return productService.delete(id) ? new ResponseEntity<Boolean>(HttpStatus.OK) : new ResponseEntity(HttpStatus.NOT_FOUND);
     }
