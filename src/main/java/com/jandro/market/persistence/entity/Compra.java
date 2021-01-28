@@ -23,11 +23,11 @@ public class Compra {
     private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
-    private String medioPago;
+    private Character medioPago;
 
     private String comentario;
 
-    private String estado;
+    private Character estado;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)

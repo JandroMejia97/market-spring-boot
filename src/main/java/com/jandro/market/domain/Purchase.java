@@ -12,8 +12,8 @@ public class Purchase {
     private int purchaseId;
     private String clientId;
     private LocalDateTime date;
-    private String paymentMethod;
+    private Character paymentMethod;
     private String comment;
-    private String state;
+    private Character state;
     private List<PurchaseItem> items;
 }

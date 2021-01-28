@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class PurchaseItem {
     private int productId;
-    private int compraId;
     private int quantity;
     private double total;
     private boolean active;
