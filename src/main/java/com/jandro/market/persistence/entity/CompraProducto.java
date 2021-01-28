@@ -2,7 +2,6 @@ package com.jandro.market.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.mapping.Join;
 
 import javax.persistence.*;
 
